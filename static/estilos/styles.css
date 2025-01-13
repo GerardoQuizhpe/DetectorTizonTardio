@@ -1,0 +1,173 @@
+body {
+    font-family: Arial, serif;
+    background-image: url('/static/imagenes/fondo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff; 
+    margin: 20px;
+    padding: 0;
+    text-align: center;
+}
+
+/* Sección de resultados */
+body.results-page {
+    font-family: Arial, serif;
+    background-image: none; /* Elimina la imagen de fondo */
+    margin: 40px;
+    padding: 0;
+    background-color: #d0d3d4;
+    color: #333;
+    text-align: center;
+}
+
+h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;                 /* Texto más grueso */
+    letter-spacing: 2px;              /* Espaciado entre letras */
+    /*text-transform: uppercase;         Texto en mayúsculas */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);  /* Sombra suave */
+    padding: 15px 0;                  /* Espaciado vertical */
+    border-bottom: 3px solid #3498db; /* Línea decorativa inferior */
+    transition: all 0.3s ease;        /* Transición suave para efectos hover */
+}
+
+h3 {
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #fff; /* Texto blanco */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    display: inline-block; /* Ajuste al tamaño del contenido */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Sombra para resaltar */
+    background-color:  rgba(0, 0, 0, 0.7); /* Color de fondo */
+}
+
+
+label.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 23px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 4px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 23px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 4px;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+ul#fileNamesList {
+    font-size: 23px;
+    margin-top: 10px;
+    padding-left: 20px;
+    list-style: disc;
+    text-align: left;
+    display: inline-block;
+    font-weight: 50;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card {
+    position: relative;
+    width: 400px; /* Tamaño uniforme para todas las tarjetas */
+    height: auto; /* Asegura que todas las tarjetas tengan el mismo tamaño */
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    background-color: #000;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card img {
+    width: 550px; /* Ajustar al ancho del contenedor */
+    height: auto; /* Mantener proporciones */
+    /* max-width: 640px; Tamaño máximo */
+    /* max-height: 640px;  Tamaño máximo */
+    object-fit: cover; /* Evitar deformaciones */
+}
+
+.error {
+    color: #d9534f;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.logout-button {
+    font-size: 25px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.logout-button:hover {
+    background-color: #c9302c;
+}
+
+.container {
+    margin: 40px; /* Centra el contenedor en la página */
+    align-items: center;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 80px;
+    padding-right: 80px;
+    
+  }
+  
+  .separator {
+    flex-grow: 1;
+    margin: 10px; /* Espaciado entre las imágenes */
+  }
+
+  /* Para móviles */
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+}

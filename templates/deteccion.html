@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de Detección</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/styles.css') }}">
+</head>
+
+<body class="results-page">
+    <button class="logout-button" onclick="window.location.href='/'">Salir</button>
+    <h1 style="color: #2c3e50;">Resultados de Detección</h1>
+
+    {% if error_message %}
+    <div class="error">
+        <p>{{ error_message }}</p>
+    </div>
+    {% endif %}
+
+    <!-- Sección para imágenes con tizón tardío -->
+    {% if detected_images %}
+    <h3>Las imágenes presentan Tizón Tardío:</h3>
+    <div class="cards">
+        {% for image in detected_images %}
+        <div class="card">
+            <img src="{{ url_for('static', filename='detecciones/' + image) }}" alt="Con Tizón Tardío">
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Sección para imágenes sin tizón tardío -->
+    {% if no_disease_images %}
+    <h3>Las imágenes no presentan Tizón Tardío:</h3>
+    <div class="cards">
+        {% for image in no_disease_images %}
+        <div class="card">
+            <img src="{{ url_for('static', filename='detecciones/' + image) }}" alt="Sin Tizón Tardío">
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+</html>

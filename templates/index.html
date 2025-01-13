@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detección de Tizón Tardío</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/styles.css') }}">
+    <script>
+        let uploadedFiles = [];
+    
+        function handleFileUpload(event) {
+            const fileList = Array.from(event.target.files);
+            uploadedFiles = uploadedFiles.concat(fileList);
+            updateFileList();
+
+            // Reinicia el campo de entrada para evitar que mantenga los archivos seleccionados
+            event.target.value = "";
+        }
+    
+        function removeFile(index) {
+            uploadedFiles.splice(index, 1); // Elimina el archivo en el índice indicado
+            updateFileList();
+        }
+    
+        function updateFileList() {
+            const fileNamesList = document.getElementById("fileNamesList");
+            const hiddenFileInput = document.getElementById("hiddenFileInput");
+            const detectButton = document.getElementById("detectButton");
+    
+            fileNamesList.innerHTML = "";
+            uploadedFiles.forEach((file, index) => {
+                const li = document.createElement("li");
+                li.textContent = file.name;
+    
+                // Crear botón para eliminar archivo
+                const removeButton = document.createElement("button");
+                removeButton.innerHTML = `<i class="fas fa-trash-alt"></i>`;
+                removeButton.style.marginLeft = "10px";
+                removeButton.style.color = "white";
+                removeButton.style.backgroundColor = "red";
+                removeButton.style.border = "none";
+                removeButton.style.borderRadius = "45%";
+                removeButton.style.cursor = "pointer";
+                removeButton.style.padding = "10px";
+                removeButton.onclick = () => removeFile(index);
+    
+                li.appendChild(removeButton);
+                fileNamesList.appendChild(li);
+            });
+    
+            // Actualiza el campo oculto con los archivos restantes
+            const dataTransfer = new DataTransfer();
+            uploadedFiles.forEach(file => dataTransfer.items.add(file));
+            hiddenFileInput.files = dataTransfer.files;
+
+            detectButton.disabled = uploadedFiles.length === 0;
+        }
+    </script>    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+          <img src="/static/imagenes/logo_unl.png">
+          <div class="separator"></div>
+          <img src="/static/imagenes/comp_logo.png" style="height: 180px; width: 400px;">
+        </div>
+      </div>      
+    <h1 class="hover">Prototipo para detectar Tizón Tardío en las hojas de Papa</h1>
+
+    <form action="/deteccion" method="POST" enctype="multipart/form-data">
+        <label for="images" class="custom-file-upload">
+            Elegir archivos
+            <input type="file" id="images" accept=".jpg, .png, .jpeg" multiple onchange="handleFileUpload(event)">
+        </label>
+
+        <!-- Campo oculto para enviar los archivos restantes -->
+        <input type="file" id="hiddenFileInput" name="images" multiple style="display: none;">
+        <button id="detectButton" type="submit" disabled>Detectar</button>
+    </form>
+
+    <!--<h3>Imágenes cargadas</h3>-->
+    <ul id="fileNamesList"></ul>
+
+    {% if error_message %}
+    <div class="error">
+        <p>{{ error_message }}</p>
+    </div>
+    {% endif %}
+
+
+</body>
+</html>
