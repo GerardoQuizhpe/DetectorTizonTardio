@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detección de Tizón Tardío</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='/estilos/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos/styles.css') }}">
     <script>
         let uploadedFiles = [];
     
@@ -56,6 +56,23 @@
 
             detectButton.disabled = uploadedFiles.length === 0;
         }
+
+        // Funciones para el modal
+        function openModal() {
+            document.getElementById('infoModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+
+        /* Cerrar modal al hacer clic en cualquier parte
+        window.onclick = function(event) {
+            const modal = document.getElementById('infoModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }*/
     </script>    
 </head>
 <body>
@@ -67,6 +84,11 @@
         </div>
       </div>      
     <h1 class="hover">Prototipo para detectar Tizón Tardío en las hojas de Papa</h1>
+
+    <!-- Mostrar icono info -->
+    <div>
+        <i class="fas fa-info-circle info-icon" onclick="openModal()"></i>
+    </div>
 
     <form action="/deteccion" method="POST" enctype="multipart/form-data">
         <label for="images" class="custom-file-upload">
@@ -88,6 +110,13 @@
     </div>
     {% endif %}
 
+    <!-- Información para el modal -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>Máximo 10 imágenes en formato PNG, JPG o JPEG</p>
+        </div>
+    </div>
 
 </body>
 </html>
